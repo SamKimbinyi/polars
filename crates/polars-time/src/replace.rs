@@ -122,7 +122,7 @@ pub fn replace_datetime(
     } else {
         &nanosecond.zip_with(&nanosecond.is_not_null(), &ca.nanosecond())?
     };
-
+    let strict = true;
     let mut out = DatetimeChunked::new_from_parts(
         year,
         month,
@@ -135,6 +135,7 @@ pub fn replace_datetime(
         &ca.time_unit(),
         ca.time_zone().as_deref(),
         ca.name().clone(),
+        strict,
     )?;
 
     // Ensure nulls are propagated.
